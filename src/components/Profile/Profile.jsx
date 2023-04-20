@@ -48,6 +48,8 @@ export default function Profile({setPost, post}) {
 
   const { userDetails } = useSelector((state) => state.user);
 
+  console.log("profile" , userDetails);
+
 
 
   const followers = userDetails.user.followers.length;

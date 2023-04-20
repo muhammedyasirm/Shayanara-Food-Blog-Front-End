@@ -30,6 +30,10 @@ function NavBar() {
     navigate('/user/post');
   }
 
+  function goChat () {
+    navigate('/user/chat');
+  }
+
   return (
     <>
       <div className="flex justify-between sticky top-0 left-0 right-0 z-10 items-center max-w-screen mx-auto px-4 rounded-xl bg-gradient-to-r from-[#e7e5e4] to-[#fee2e2]">
@@ -45,10 +49,9 @@ function NavBar() {
         <ul className='hidden md:flex'>
           <li className='p-4 cursor-pointer' onClick={goHome}>HOME</li>
           <li className='p-4 cursor-pointer' onClick={goPost}>POSTS</li>
-          <li className='p-4 cursor-pointer'>RECIPE</li>
           {token ? (
             <>
-              <li className='p-4 cursor-pointer'>CHAT</li>
+              <li className='p-4 cursor-pointer' onClick={goChat}>CHAT</li>
               <li className='p-4 cursor-pointer' onClick={goProfile}>PROFILE</li>
               <li className='p-4 cursor-pointer' onClick={() => {
                 setLog(true)
@@ -91,10 +94,9 @@ function NavBar() {
           <ul className='uppercase p-4 flex-col items-start justify-start'>
             <li className='p-4 flex cursor-pointer border-b border-gray-400' onClick={goHome}>HOME</li>
             <li className='p-4 flex cursor-pointer border-b border-gray-400' onClick={goPost}>POSTS</li>
-            <li className='p-4 flex cursor-pointer border-b border-gray-400'>RECIPE</li>
             {token ? (
               <>
-                <li className='p-4 flex cursor-pointer border-b border-gray-400'>CHAT</li>
+                <li className='p-4 flex cursor-pointer border-b border-gray-400' onClick={goChat}>CHAT</li>
                 <li className='p-4 flex cursor-pointer border-b border-gray-400' onClick={goProfile}>PROFILE</li>
                 <li className='p-4 flex cursor-pointer border-b border-gray-400'
                   onClick={() => {

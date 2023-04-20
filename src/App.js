@@ -12,7 +12,10 @@ import UserProfile from './pages/UserProfile/UserProfile';
 import UserAuthorization from './components/Authorization/UserAuthorization';
 import Post from './pages/Posts/Post';
 import LocationManagement from './pages/LocationManagement/LocationManagement';
-import SinglePost from './components/SinglePost/SinglePost';
+import SinglePost from './pages/SinglePost/SinglePost';
+import Chat from './pages/Chat/Chat';
+import ReportPage from './pages/ReportPage/ReportPage';
+import ReportPostSingle from './components/AdminReport/ReportPostSingle';
 function App() {
   return (
     <>
@@ -21,9 +24,10 @@ function App() {
         <Route path='/' element = { <Home/> }/>
         <Route path='/user/post' element = { <Post/> }/>
         <Route path='/user/ForgotPassword' element= {<ForgotPassword/> } />
-        <Route path='/user/singlePost' element= {<SinglePost/>}/>
         <Route element={<UserAuthorization/>}>
           <Route path='/user/profile'  element= { <UserProfile/> } />
+          <Route path='/user/singlePost/:id' element= {<SinglePost/>}/>
+          <Route path='/user/chat' element= {<Chat/>}/>
         </Route>
         
 
@@ -31,6 +35,8 @@ function App() {
         <Route path = '/admin/dashboard' element={<AdminPrivateRoutes><AdminDashboard/></AdminPrivateRoutes>}/>
         <Route path='/admin/users' element={<AdminPrivateRoutes><AdminUser/></AdminPrivateRoutes>}/>
         <Route path='/admin/location' element={<AdminPrivateRoutes><LocationManagement/></AdminPrivateRoutes>}/>
+        <Route path='/admin/report' element={<AdminPrivateRoutes><ReportPage/></AdminPrivateRoutes>}/>
+        <Route path='/admin/reportSingle/:id/:rid' element={<AdminPrivateRoutes><ReportPostSingle/></AdminPrivateRoutes>}/>
       </Routes>
     </Router>
       <ToastContainer />

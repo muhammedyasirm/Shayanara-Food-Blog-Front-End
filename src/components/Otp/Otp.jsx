@@ -170,7 +170,7 @@ const Otp = ({
             style = {
                 {color: seconds > 0 || minutes > 0 ? "#DFE3E8" : "#dc2626"}
             }
-            //  onClick={resendOtp}
+              onClick={resendOtp}
             >
                 Resend OTP
             </p>

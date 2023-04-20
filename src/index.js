@@ -8,17 +8,23 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { persistStore } from 'redux-persist';
 import Store from './Redux/Store';
+import { ChakraProvider } from '@chakra-ui/react'
+import ChatProvider from './Context/ChatProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const persistor = persistStore(Store);
 root.render(
-  <React.StrictMode>
+  <ChatProvider>
+    <ChakraProvider>
     <Provider store={Store}>
       <PersistGate persistor={persistor}>
-        <App />
+        <ChakraProvider>
+          <App />
+        </ChakraProvider>
       </PersistGate>
     </Provider>
-  </React.StrictMode>
+  </ChakraProvider>
+  </ChatProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

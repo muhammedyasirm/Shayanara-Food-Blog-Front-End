@@ -10,7 +10,6 @@ function Post() {
   const [post,setPost] = useState([]);
         useEffect(() => {
         axios.get('/users/getPosts').then(response => {
-          console.log("Postundade",response)
              setPost(response.data.postDatas)
         }).catch(error => {
             console.log(error)
