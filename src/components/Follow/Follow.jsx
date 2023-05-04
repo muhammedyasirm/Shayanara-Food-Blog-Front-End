@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { AiOutlineClose, AiOutlineMenu, AiFillMessage } from "react-icons/ai";
 import axios from '../../axios/userAxios';
 import { useSelector } from 'react-redux';
+import { URL } from '../../constance/constance';
 
 const Follow = ({ pos }) => {
   const [follow, setFollow] = useState(false);
@@ -20,7 +21,7 @@ const Follow = ({ pos }) => {
 
   useEffect(() => {
     fetch(
-      `http://localhost:5000/user/followersDetails/${userDetails.user._id}`,
+      `${URL}/user/followersDetails/${userDetails.user._id}`,
       {
         headers: {
           "Content-Type": "application/json",
@@ -45,7 +46,7 @@ const Follow = ({ pos }) => {
 
   const followUser = (id) => {
     const userId = userDetails.user._id;
-    fetch(`http://localhost:5000/user/followUser/${id}`, {
+    fetch(`${URL}/user/followUser/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

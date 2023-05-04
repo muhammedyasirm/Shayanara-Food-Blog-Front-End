@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { format } from "timeago.js";
 import { BsArrowRightCircleFill } from "react-icons/bs";
 import { useSelector } from 'react-redux';
+import { URL } from '../../constance/constance';
 
 const Comments = ({ pos, id }) => {
 
@@ -13,7 +14,7 @@ const Comments = ({ pos, id }) => {
 
     const postComment = (id) => {
         console.log("Postile id ", id);
-        fetch(`http://localhost:5000/user/commentPost/${id}`, {
+        fetch(`${URL}/user/commentPost/${id}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -32,7 +33,7 @@ const Comments = ({ pos, id }) => {
 
     useEffect(() => {
         if (user) {
-            fetch(`http://localhost:5000/user/postComments/${id}`, {
+            fetch(`${URL}/user/postComments/${id}`, {
                 headers: {
                     "Content-Type": "application/json",
                     "X-Custom-Header": `${user}`

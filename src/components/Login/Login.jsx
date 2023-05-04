@@ -51,7 +51,6 @@ const Login = ({onClose,open}) => {
                 if(result.data.err) {
                     setErrMsg(result.data.err)
                 } else if (result.data.logged) {
-                    console.log("Login'le userDetails",result);
                     localStorage.setItem("token",result.data.token);
                     dispatch(setUserDetails(result.data))
                     onClose();

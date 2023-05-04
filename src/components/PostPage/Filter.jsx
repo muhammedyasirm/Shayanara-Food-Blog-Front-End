@@ -38,7 +38,7 @@ const Filter = ({ setFilter, handleFilter }) => {
           <p className='uppercase m-1 py-1 px-2 border-2 rounded-2xl hover:text-white cursor-pointer text-sm hover:bg-[#525252]' onClick={() => handleFilter("all")}>
             All
           </p>
-          {location.map((opt, i) => {
+          {location?.map((opt, i) => {
             return (
               <p key={i} className='uppercase m-1 py-1 px-2 border-2 rounded-2xl hover:text-white cursor-pointer text-sm hover:bg-[#525252]' onClick={() => handleFilter(opt.name)}>
                 {opt.name}

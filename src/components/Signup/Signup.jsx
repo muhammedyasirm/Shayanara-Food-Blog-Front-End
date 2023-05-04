@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import { AiOutlineClose } from 'react-icons/ai';
 import { toast } from 'react-toastify';
-import axios from 'axios';
+import axios from '../../axios/userAxios';
 import Otp from '../Otp/Otp';
+import { URL } from '../../constance/constance';
 
 const RegisterStyle = {
     position: 'fixed',
@@ -51,7 +52,7 @@ const Signup = ({ open, onClose }) => {
         } else if (password !== password2) {
             setErrMsg("Entered passwords are not matching");
         } else {
-            axios.post('http://localhost:5000/user/register', { userName, fullName, email, phone, password }).then((response) => {
+            axios.post('/user/register', { userName, fullName, email, phone, password }).then((response) => {
             console.log("response kitty")
             if (response.data.err) {
                 console.log("Something wrong")

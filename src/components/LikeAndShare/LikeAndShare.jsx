@@ -3,6 +3,7 @@ import { AiOutlineLike, AiFillLike } from "react-icons/ai";
 import { IoMdShareAlt } from "react-icons/io";
 import { TbMessageReport } from "react-icons/tb";
 import { useSelector } from 'react-redux';
+import { URL } from '../../constance/constance';
 import ReportOnPost from '../ReportOnPost/ReportOnPost';
 
 
@@ -18,7 +19,7 @@ const LikeAndShare = ({id, postedUser, user1}) => {
 
   useEffect(() => {
     if(user){ 
-      fetch(`http://localhost:5000/user/getLikeDetails/${id}`, {
+      fetch(`${URL}/user/getLikeDetails/${id}`, {
         headers: {
           "Content-Type": "application/json",
           "X-Custom-Header": `${user}`
@@ -41,7 +42,7 @@ const LikeAndShare = ({id, postedUser, user1}) => {
 
   const likePost = () => {
     if(user) {
-      fetch(`http://localhost:5000/user/likePost/${id}`,{
+      fetch(`${URL}/user/likePost/${id}`,{
         method: "POST",
         headers: {
           "Content-Type": "application/json",

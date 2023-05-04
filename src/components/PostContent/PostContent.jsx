@@ -18,7 +18,7 @@ function PostContent({ homePost }) {
 
   return (
     <>
-      {homePost.slice(0, 2).map((post, i) => {
+      {homePost?.slice(0, 2).map((post, i) => {
         {
           return (
             // <div className='flex justify-center' key={i}>

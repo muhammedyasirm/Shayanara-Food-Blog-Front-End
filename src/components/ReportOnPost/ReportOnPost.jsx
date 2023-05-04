@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { AiOutlineClose } from "react-icons/ai";
 import { toast } from "react-toastify";
 import { useSelector } from 'react-redux';
+import { URL } from '../../constance/constance';
 
 const Register_style = {
     position: "fixed",
@@ -40,7 +41,7 @@ const ReportOnPost = ({ id, postedUser, userId, open, onClose }) => {
             setErrMsg("Write a valid reason!!!");
             return;
         }
-        fetch(`http://localhost:5000/user/reportPost/${id}`, {
+        fetch(`${URL}/user/reportPost/${id}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
