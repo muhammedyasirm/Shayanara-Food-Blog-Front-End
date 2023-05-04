@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
 import { toast } from 'react-toastify';
-import axios from 'axios';
+import axios from '../../axios/userAxios';
 import ResetPassword from '../ResetPassword/ResetPassword';
 
 const Register_style = {
@@ -62,7 +62,7 @@ const Otp = ({
       if(!otp) {
         setErrMsg("Empty values are not allowed");
       } else {
-        axios.post('http://localhost:5000/user/otpVerify', { email, otp }).then((response) => {
+        axios.post('/user/otpVerify', { email, otp }).then((response) => {
           if(response.data.err) {
             console.log('Something wrong');
           }
@@ -103,7 +103,7 @@ const Otp = ({
     }
 
     function resendOtp() {
-      axios.post('http://localhost:5000/user/otpVerify',{ email }).then((res) => {
+      axios.post('/user/otpVerify',{ email }).then((res) => {
         if(res.data.err) {
           console.log("Something wrong err");
         }
