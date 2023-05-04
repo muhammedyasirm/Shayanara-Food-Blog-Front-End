@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { AiOutlineClose } from "react-icons/ai";
+import React, { useEffect, useState } from 'react';
 import { GrImage } from "react-icons/gr";
+import { AiOutlineClose } from "react-icons/ai";
 import { Tooltip as ReactTooltip } from "react-tooltip";
 import { AiOutlineCloseCircle, AiOutlinePlusCircle } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import axios from '../../axios/userAxios';
 import { toast } from "react-toastify";
-import { useDispatch, useSelector } from "react-redux";
+
 
 const Register_style = {
     position: "fixed",
@@ -28,25 +28,40 @@ const overlay_style = {
     zIndex: 1000,
 };
 
-const AddPost = ({ open, id, onClose, changePost }) => {
-    const navigate = useNavigate();
+const EditPost = ({ open, post, onClose, yourPost }) => {
+
+    console.log("Post id kitty", post);
+
+    const [postt, setPost] = useState({});
+
+    const postToEdit = yourPost.find((yourpost) => yourpost._id === post);
+
+    console.log("postToEdit: ",postToEdit);
+
+    useEffect(() => {
+        console.log("effecting"); 
+        if (postToEdit && postToEdit !== postt) {
+            setPost(postToEdit);
+        }
+    }, [postToEdit, postt])
+
     const [add, setAdd] = useState(false);
     const [rest, setRest] = useState(false);
 
-    const [foodName, setFoodName] = useState("");
-    const [desc, setDesc] = useState("");
-    const [rating, setRating] = useState("");
-    const [image1, setImage1] = useState("");
-    const [resName, setResName] = useState("");
-    const [image2, setImage2] = useState("");
-    const [contact, setContact] = useState("");
-    const [address, setAddress] = useState("");
+    const [foodName, setFoodName] = useState(postt.foodName);
+    const [desc, setDesc] = useState(postt.desc);
+    const [rating, setRating] = useState(postt.rating);
+    const [image1, setImage1] = useState(postt.images);
+    const [resName, setResName] = useState(postt.resName);
+    const [image2, setImage2] = useState(postt.resImage);
+    const [contact, setContact] = useState(postt.contact);
+    const [address, setAddress] = useState(postt.address);
     const [errMsg, setErrMsg] = useState("");
     const [getLocation, setGetLocation] = useState([]);
-    const dispatch = useDispatch();
 
+    console.log("YOur post", yourPost);
 
-    let url1, url2;
+    console.log("Post detailllllll",postt);
 
     useEffect(() => {
         const fetchLocation = async () => {
@@ -59,121 +74,8 @@ const AddPost = ({ open, id, onClose, changePost }) => {
         }
 
         fetchLocation();
-    },[])
+    }, [])
 
-    async function addContent() {
-        if (add === false) {
-            setAdd(true);
-        } else {
-            if (image1) {
-                const data = new FormData();
-                data.append("file", image1);
-                data.append("upload_preset", process.env.REACT_APP_UPLOAD_PRESET);
-                data.append("cloud_name", process.env.REACT_APP_CLOUD_NAME);
-
-                await fetch(`https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUD_NAME}/image/upload`, {
-                    method: "post",
-                    body: data
-                }).then((res) => res.json())
-                    .then((data) => {
-                        url1 = data.url
-                    }).catch((err) => {
-                        console.log(err);
-                    });
-                setAdd(false);
-            } else {
-                setAdd(false);
-            }
-        }
-    }
-
-    async function resImage() {
-        if (rest === false) {
-            setRest(true);
-        } else {
-            if (image2) {
-                const data = new FormData();
-                data.append("file", image2);
-                data.append("upload_preset", process.env.REACT_APP_UPLOAD_PRESET);
-                data.append("cloud_name", process.env.REACT_APP_CLOUD_NAME);
-
-                await fetch(`https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUD_NAME}/image/upload`, {
-                    method: "post",
-                    body: data
-                }).then((res) => res.json()).then((data) => {
-                    url2 = data.url;
-                }).catch((err) => {
-                    console.log(err)
-                });
-                setRest(false);
-            } else {
-                setRest(false)
-            }
-        }
-    }
-
-
-    async function storePost() {
-        if (!foodName || !desc || !rating || !resName) {
-            setErrMsg("Fields cannot be empty");
-        } else if (foodName.length < 3) {
-            setErrMsg("Enter food name with atleast 3 letters");
-        } else if (desc.length < 20) {
-            setErrMsg("Description must be more than 20 words");
-        } else if (rating > 5 || isNaN(rating)) {
-            setErrMsg("Enter a valid rating for the food");
-        } else {
-            if (contact.length !== 10 || isNaN(contact)) {
-                return setErrMsg("Please enter a valid number to contact");
-            }
-
-            if (address.length <= 3) {
-                return setErrMsg("Enter a valid address");
-            }
-            if (image1) {
-                 await addContent();
-            }
-            if (image2) {
-               await resImage();
-            }
-        }
-
-         await axios.post(`/users/addPost/${id}`, {
-            foodName,
-            desc,
-            rating,
-            resName,
-            contact,
-            address,
-            url1,
-            url2
-        })
-            .then((response) => {
-                console.log("post cheythittund: ", response);
-                if(response.err) {
-                    console.log(response.err)
-                }
-                if (response.status === "emptyErr") {
-                    setErrMsg("Empty values are not allowed");
-                } else {
-                    onClose();
-                    changePost();
-                    toast.success("Post added successfully", {
-                        position: "top-center",
-                        autoClose: 5000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                        theme: "colored",
-                    });
-                }
-            }).catch((err) => {
-                console.log(err)
-            })
-
-    }
     if (!open) return null;
     return (
         <>
@@ -198,7 +100,7 @@ const AddPost = ({ open, id, onClose, changePost }) => {
                                     id="my-element"
                                     data-tooltip-content="Add food image"
                                     className="h-10 w-10 my-auto mr-3 cursor-pointer"
-                                    onClick={addContent}
+                                // onClick={addContent}
                                 />
                                 <ReactTooltip anchorId="my-element" />
                             </>
@@ -208,7 +110,7 @@ const AddPost = ({ open, id, onClose, changePost }) => {
                                     id="my-element2"
                                     data-tooltip-content="Close"
                                     className="h-10 w-10 my-auto mr-3 cursor-pointer"
-                                    onClick={addContent}
+                                // onClick={addContent}
                                 />
                                 <ReactTooltip anchorId="my-element2" />
                             </>
@@ -247,7 +149,7 @@ const AddPost = ({ open, id, onClose, changePost }) => {
                             className="w-[50%] h-16 focus:outline-none border-none text-[20px]"
                             type="text"
                             placeholder={add ? "" : "Tell your food name . . ."}
-                            value={foodName}
+                            value={postt.foodName}
                             onChange={(e) => setFoodName(e.target.value)}
                         />
                         <br />
@@ -257,7 +159,7 @@ const AddPost = ({ open, id, onClose, changePost }) => {
                         className="w-[70%] ml-14 h-16 focus:outline-none border-none text-[20px]"
                         type="text"
                         placeholder="Write something about the food . . ."
-                        value={desc}
+                        value={postt.desc}
                         onChange={(e) => setDesc(e.target.value)}
                     />
                     <br />
@@ -265,7 +167,7 @@ const AddPost = ({ open, id, onClose, changePost }) => {
                         className="w-[70%] ml-14 h-16 focus:outline-none border-none text-[20px]"
                         type="text"
                         placeholder="Give a rating for the food in 5. . ."
-                        value={rating}
+                        value={postt.rating}
                         onChange={(e) => setRating(e.target.value)}
                     />
                     <br />
@@ -276,7 +178,7 @@ const AddPost = ({ open, id, onClose, changePost }) => {
                                     id="my-element5"
                                     data-tooltip-content="Add image for Restaurant"
                                     className="h-10 w-10 my-auto mr-3 cursor-pointer"
-                                    onClick={resImage}
+                                // onClick={resImage}
                                 />
                                 <ReactTooltip anchorId="my-element5" />
                             </>
@@ -286,7 +188,7 @@ const AddPost = ({ open, id, onClose, changePost }) => {
                                     id="my-element6"
                                     data-tooltip-content="Close"
                                     className="h-10 w-10 my-auto mr-3 cursor-pointer"
-                                    onClick={resImage}
+                                // onClick={resImage}
                                 />
                                 <ReactTooltip anchorId="my-element6" />
                             </>
@@ -316,7 +218,7 @@ const AddPost = ({ open, id, onClose, changePost }) => {
                             className="w-[50%] h-16 focus:outline-none border-none text-[20px]"
                             type="text"
                             placeholder={rest ? "" : "Tell restaurant name"}
-                            value={resName}
+                            value={postt.resName}
                             onChange={(e) => setResName(e.target.value)}
                         />
                         <br />
@@ -327,7 +229,7 @@ const AddPost = ({ open, id, onClose, changePost }) => {
                         className="w-[70%] ml-14 h-16 focus:outline-none border-none text-[20px]"
                         type="text"
                         placeholder="Contact number of restaurant"
-                        value={contact}
+                        value={postt.contact}
                         onChange={(e) => setContact(e.target.value)}
                     />
                     <br />
@@ -337,7 +239,7 @@ const AddPost = ({ open, id, onClose, changePost }) => {
                         className="w-[70%] ml-14 mt-2 h-10 rounded-lg focus:outline-none border-none text-[20px]"
                         type="text"
 
-                        value={address}
+                        value={postt.address}
                         onChange={(e) => setAddress(e.target.value)}
                     >
                         {
@@ -351,11 +253,11 @@ const AddPost = ({ open, id, onClose, changePost }) => {
                 </form>
                 <button
                     id="my-element7"
-                    data-tooltip-content="Add Post"
+                    data-tooltip-content="Edit Post"
                     className=" px-3 py-2 mt-5 mb-8 mx-12 bg-[#fbcfe8] hover:bg-[#db2777] hover:text-white"
-                    onClick={storePost}
+                // onClick={storePost}
                 >
-                    Add Post
+                    Edit Post
                 </button>
                 <ReactTooltip anchorId="my-element7" />
             </div>
@@ -363,4 +265,4 @@ const AddPost = ({ open, id, onClose, changePost }) => {
     )
 }
 
-export default AddPost
+export default EditPost

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { BsFillStarFill } from 'react-icons/bs';
 import LikeAndShare from '../LikeAndShare/LikeAndShare';
 import { format } from "timeago.js";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Comments from '../Comments/Comments';
 import Follow from '../Follow/Follow';
 import axios from '../../axios/userAxios';

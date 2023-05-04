@@ -5,12 +5,14 @@ import { useParams } from 'react-router-dom';
 import axios from '../../axios/adminAxios';
 import { format } from "timeago.js";
 import PostDelete from './PostDelete';
+import ReportDelete from './ReportDelete';
 
 
 const ReportPostSingle = () => {
 
     const [reportedPost, setReportedPost] = useState([]);
     const [confirm, setConfirm] = useState(false);
+    const [reportConfirm, setReportConfirm] = useState(false);
 
     const params = useParams();
     const id = params.id;
@@ -42,6 +44,7 @@ const ReportPostSingle = () => {
                                                     ? pos.details[0].profilePic
                                                     : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
                                             }
+                                            alt='/'
                                         />
                                         <div className="pl-2 pt-2">
                                             <h6 className="font-semibold text-md">
@@ -66,13 +69,13 @@ const ReportPostSingle = () => {
                                         className="rounded-sm w-100 h-100 my-4"
                                         src={pos.images
                                             ? pos.images.url
-                                            : "https://t4.ftcdn.net/jpg/04/70/29/97/360_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg"} />
+                                            : "https://t4.ftcdn.net/jpg/04/70/29/97/360_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg"} alt='/' />
                                     <p>{pos.desc}</p>
                                     <img
                                         className="rounded-sm w-100 h-100 my-4"
                                         src={pos.resImage
                                             ? pos.resImage.url
-                                            : "https://t4.ftcdn.net/jpg/04/70/29/97/360_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg"} />
+                                            : "https://t4.ftcdn.net/jpg/04/70/29/97/360_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg"} alt='/'/>
                                     <div className="flex">
                                         <p className="text-[24px] font-semibold">{pos.resName}</p>
                                         <p className="border rounded-xl mx-2 my-3 font-medium px-1 text-[10px] text-[#dc2626]">
@@ -108,7 +111,12 @@ const ReportPostSingle = () => {
                                     id={id}
                                     rid={rid}
                                     />
-                                    <Button colorScheme='teal'>Delete Report</Button>
+                                    <Button colorScheme='teal' onClick={() => setReportConfirm(true)}>Delete Report</Button>
+                                    <ReportDelete
+                                    open={reportConfirm}
+                                    onClose={() => setReportConfirm}
+                                    rid={rid}
+                                    />
                                 </div>
                             </div>
                         </>

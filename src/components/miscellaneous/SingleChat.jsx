@@ -9,8 +9,7 @@ import axios from '../../axios/userAxios';
 import './style.css';
 import ScrollableChat from './ScrollableChat';
 import io from 'socket.io-client';
-import Lottie from 'react-lottie';
-import animationData from '../../animations/typing.json'
+// import animationData from '../../animations/typing.json'
 
 const ENDPOINT = "http://localhost:5000";
 let socket, selectedChatCompare;
@@ -24,14 +23,14 @@ const SingleChat = ({fetchAgain, setFetchAgain}) => {
     const [typing, setTyping] = useState(false);
     const [isTyping, setIsTyping] = useState(false);
 
-    const defaultOptions = {
-        loop: true,
-        autoplay: true,
-        animationData: animationData,
-        rendererSettings: {
-            preserverAspectRatio: "xMidYMid slice"
-        }
-    }
+    // const defaultOptions = {
+    //     loop: true,
+    //     autoplay: true,
+    //     animationData: animationData,
+    //     rendererSettings: {
+    //         preserverAspectRatio: "xMidYMid slice"
+    //     }
+    // }
 
     const { selectedChat, setSelectedChat, notification, setNotification } = ChatState();
     const { userDetails } = useSelector((state) => state.user);
@@ -196,11 +195,7 @@ const SingleChat = ({fetchAgain, setFetchAgain}) => {
                 )}
                 <FormControl onKeyDown={sendMessage} isRequired mt={3}>
                     {isTyping ? <div>
-                        <Lottie
-                        options={defaultOptions}
-                        width={70}
-                        style={{ marginBottom: 15, marginLeft: 0}}
-                        />
+                        Typing...
                         </div> : <></>}
                     <Input
                     variant="filled"

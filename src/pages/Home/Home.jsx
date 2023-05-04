@@ -3,7 +3,6 @@ import Banner from '../../components/Banner/Banner'
 import NavBar from '../../components/navBar/NavBar'
 import RowPost from '../../components/RowPost/RowPost'
 import PostContent from '../../components/PostContent/PostContent'
-import RowRecipe from '../../components/RowRecipe/RowRecipe'
 import Footer from '../../components/Footer/Footer'
 import axios from '../../axios/userAxios';
 function Home() {
@@ -24,7 +23,6 @@ function Home() {
       <Banner/> 
       <RowPost/>
       <PostContent homePost = { homePost }/>
-      <RowRecipe/>
       <Footer/>
     </div>
   )

@@ -1,13 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { BsFillStarFill } from 'react-icons/bs';
 import { MdDelete } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
 import { format } from 'timeago.js';
 import { useSelector } from 'react-redux';
+import EditPost from './EditPost';
+import DeletePost from './DeletePost';
 
-const YourPost = ({yourPosts}) => {
+const YourPost = ({ yourPosts }) => {
 
-const { userDetails } = useSelector((state) => state.user);
+
+    const { userDetails } = useSelector((state) => state.user);
+    const [deletePost, setDeletePost] = useState(false);
+    const [postId, setPostId] = useState()
+
+    const handleDelete = (id) => {
+        setDeletePost(true);
+        setPostId(id);
+    }
 
     return (
         <>
@@ -17,7 +27,7 @@ const { userDetails } = useSelector((state) => state.user);
                 </h3>
             </div>
             {yourPosts.length > 0 && yourPosts.map((post, i) => {
-                {
+                
                     return (
                         // <div className='flex justify-center' key={i}>
                         <div key={i} className="max-w-[100%] mx-auto px-20 py-6 relative justify-center flex flex-col sm:flex-row items-center">
@@ -34,13 +44,9 @@ const { userDetails } = useSelector((state) => state.user);
                                     </div>
                                     <div>
                                         <div className=" w-16 h- absolute  rounded-lg flex  opacity-5 hover:opacity-100 scale-110 ease-in-out duration-300">
-                                            <FaEdit
-                                                className="w-8 h-8 mr-2 mt-1 cursor-pointer "
-                                                // onClick={() => setEdit(true)}
-                                            />
                                             <MdDelete
                                                 className="w-8 h-8 mt-1 cursor-pointer"
-                                                // onClick={() => setDel(true)}
+                                                onClick={() => handleDelete(post._id)}
                                             />
                                         </div>
                                     </div>
@@ -81,15 +87,20 @@ const { userDetails } = useSelector((state) => state.user);
                         </div>
                         // </div>
                     );
-                }
-            })} 
+                
+            })}
+            <DeletePost
+            open = { deletePost }
+            id = { postId }
+            onClose={() => setDeletePost(false)}
+            />
             {
-                yourPosts.length <=0 && 
+                yourPosts.length <= 0 &&
                 <div className='flex justify-center mt-3'>
-                <h3 class="mt-0 mb-20 text-3xl font-medium leading-tight text-primary text-red-700">
-                    You didn't post anything yet!!
-                </h3>
-            </div>
+                    <h3 class="mt-0 mb-20 text-3xl font-medium leading-tight text-primary text-red-700">
+                        You didn't post anything yet!!
+                    </h3>
+                </div>
             }
         </>
     )

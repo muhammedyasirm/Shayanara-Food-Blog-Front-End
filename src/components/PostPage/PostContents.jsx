@@ -41,15 +41,6 @@ const PostContents = ({ post }) => {
                     type="text"
                     placeholder="Search here for posts"
                 />
-
-                {token && (
-                    <div className="mt-2 md:mt-0 text-center md:text-left">
-                        <button
-                            className="px-4 py-2 text-sm font-medium text-white bg-gradient-to-br from-cyan-500 to-blue-500 rounded-md shadow-md hover:from-cyan-600 hover:to-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-400 inline-block">
-                            Add Post
-                        </button>
-                    </div>
-                )}
             </div>
             <Filter setFilter={setFilter} handleFilter={handleFilter} />
 

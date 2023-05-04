@@ -21,8 +21,6 @@ function UserProfile() {
         })
     }, [post]);
 
-    console.log(yourPosts)
-
 
   return (
     <div>
