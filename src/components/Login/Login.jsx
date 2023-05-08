@@ -48,9 +48,9 @@ const Login = ({onClose,open}) => {
         validate();
         if(!errMsg) {
             axios.post('/user/login', {name, password}).then((result) => {
-                if(result.data.err) {
+                if(result?.data?.err) {
                     setErrMsg(result.data.err)
-                } else if (result.data.logged) {
+                } else if (result?.data?.logged) {
                     localStorage.setItem("token",result.data.token);
                     dispatch(setUserDetails(result.data))
                     onClose();

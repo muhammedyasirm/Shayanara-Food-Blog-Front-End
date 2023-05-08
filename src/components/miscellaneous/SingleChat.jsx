@@ -12,6 +12,7 @@ import io from 'socket.io-client';
 // import animationData from '../../animations/typing.json'
 
 const ENDPOINT = "https://shayanara.online/backend";
+//const ENDPOINT = "http://localhost:5000"
 let socket, selectedChatCompare;
 
 const SingleChat = ({fetchAgain, setFetchAgain}) => {
