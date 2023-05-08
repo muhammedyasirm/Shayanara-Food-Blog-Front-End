@@ -13,7 +13,6 @@ const RecipeComment = ({ recipe, id }) => {
 
     const postComment = (id) => {
         axios.post(`/user/postRecipeComment/${id}`, { user, comment }).then((res) => {
-            console.log("recipeComment post", res)
             setComment("");
         }).catch((err) => {
             console.log("Oomby", err);
@@ -23,13 +22,11 @@ const RecipeComment = ({ recipe, id }) => {
     useEffect(() => {
         if (user) {
             axios.get(`/user/getRecipeComment/${id}`).then((res) => {
-                console.log("Response comment",res.data);
                 setComments(res.data.data);
             })
         }
     }, [comment])
 
-    console.log("Comments kittiyade", comments);
 
     return (
         <>

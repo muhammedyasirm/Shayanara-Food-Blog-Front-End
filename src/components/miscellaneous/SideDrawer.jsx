@@ -11,15 +11,12 @@ import { Avatar,
         DrawerOverlay,
         Input,
         Menu,
-        MenuButton,
-        MenuDivider,
         MenuItem,
         MenuList,
         Text,
         Tooltip,
         useToast
              } from '@chakra-ui/react';
-import { BellIcon, ChevronDownIcon } from '@chakra-ui/icons';
 import { useDisclosure } from '@chakra-ui/hooks';
 import { useSelector } from "react-redux";
 import ChatLoading from './ChatLoading';
@@ -37,7 +34,6 @@ const SideDrawer = () => {
     const  [loadingChat, setLoadingChat] = useState();
 
     const { setSelectedChat, chats, setChats, notification, setNotification } = ChatState();
-    console.log("_______________",notification);
 
     const { userDetails } = useSelector((state) => state.user);
     const user = userDetails.user;

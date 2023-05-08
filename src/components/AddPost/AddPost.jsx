@@ -3,10 +3,8 @@ import { AiOutlineClose } from "react-icons/ai";
 import { GrImage } from "react-icons/gr";
 import { Tooltip as ReactTooltip } from "react-tooltip";
 import { AiOutlineCloseCircle, AiOutlinePlusCircle } from "react-icons/ai";
-import { useNavigate } from "react-router-dom";
 import axios from '../../axios/userAxios';
 import { toast } from "react-toastify";
-import { useDispatch, useSelector } from "react-redux";
 
 const Register_style = {
     position: "fixed",
@@ -29,7 +27,6 @@ const overlay_style = {
 };
 
 const AddPost = ({ open, id, onClose, changePost }) => {
-    const navigate = useNavigate();
     const [add, setAdd] = useState(false);
     const [rest, setRest] = useState(false);
 
@@ -43,7 +40,6 @@ const AddPost = ({ open, id, onClose, changePost }) => {
     const [address, setAddress] = useState("");
     const [errMsg, setErrMsg] = useState("");
     const [getLocation, setGetLocation] = useState([]);
-    const dispatch = useDispatch();
 
 
     let url1, url2;

@@ -53,7 +53,6 @@ const Signup = ({ open, onClose }) => {
             setErrMsg("Entered passwords are not matching");
         } else {
             axios.post('/user/register', { userName, fullName, email, phone, password }).then((response) => {
-            console.log("response kitty")
             if (response.data.err) {
                 console.log("Something wrong")
             }

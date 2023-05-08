@@ -15,7 +15,6 @@ const LikeAndShare = ({id, postedUser, user1}) => {
 
   const user  = userDetails.user._id;
 
-  console.log("Posted user" , postedUser);
 
   useEffect(() => {
     if(user){ 

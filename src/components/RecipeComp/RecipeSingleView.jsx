@@ -18,7 +18,6 @@ const RecipeSingleView = () => {
 
     useEffect(() => {
         axios.get(`/user/getSingleView/${id}`).then((res) => {
-            console.log("Single Recipe",res.data.recipe);
             setRecipe(res.data.recipe);
         })
     },[])

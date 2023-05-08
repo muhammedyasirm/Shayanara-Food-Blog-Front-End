@@ -1,6 +1,8 @@
 import React, {useState} from 'react'
-import { PlusIcon, XIcon, CloudUploadIcon } from "@heroicons/react/solid";
+import { XIcon, CloudUploadIcon } from "@heroicons/react/solid";
 import axios from '../../axios/adminAxios';
+import { useNavigate } from "react-router-dom";
+
 const AddBanner = () => {
 
     const [imageFile, setImageFile] = useState(null);
@@ -8,6 +10,8 @@ const AddBanner = () => {
     const [foodName, setFoodName] = useState("");
     const [hotelName, setHotelName] = useState("");
     const [offer, setOffer] = useState("");
+
+    const navigate = useNavigate();
 
     const handleRecipeNameChange = (event) => {
         setBannerName(event.target.value);
@@ -43,8 +47,7 @@ const AddBanner = () => {
             "Content-type": "multipart/form-data"
         }
        }).then((result) => {
-        console.log("banner add aaki" , result);
-        
+        navigate("/admin/bannerTable");     
        })
     };
 

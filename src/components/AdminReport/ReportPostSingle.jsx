@@ -18,13 +18,8 @@ const ReportPostSingle = () => {
     const id = params.id;
     const rid = params.rid;
 
-    console.log("report id single page",rid);
-
-    console.log("singlePost id", id);
-
     useEffect(() => {
         axios.get(`/admin/reportSingle/${id}`).then((res) => {
-            console.log("single reportttt", res);
             setReportedPost(res.data.post);
         })
     }, []);

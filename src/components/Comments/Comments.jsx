@@ -13,7 +13,6 @@ const Comments = ({ pos, id }) => {
     const user = userDetails.user._id;
 
     const postComment = (id) => {
-        console.log("Postile id ", id);
         fetch(`${URL}/user/commentPost/${id}`, {
             method: "POST",
             headers: {

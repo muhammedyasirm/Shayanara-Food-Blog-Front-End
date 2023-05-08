@@ -19,7 +19,6 @@ instance.interceptors.request.use((config) => {
 
 instance.interceptors.response.use(
     (response) => {
-        console.log("axiosile response",response)
         return response;
     },
     (error) => {

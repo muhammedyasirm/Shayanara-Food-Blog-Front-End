@@ -13,7 +13,6 @@ const RecipeContent = () => {
 
     const fetchRecipe = useCallback(() => {
         axios.get('/admin/getRecipe').then((res) => {
-            console.log("Recipe kittiyade", res);
             if (res.data.data) {
                 setRecipe(res.data.data);
             }
@@ -23,8 +22,6 @@ const RecipeContent = () => {
     useMemo(() => {
         fetchRecipe();
     }, [fetchRecipe]);
-
-    console.log("Recipe sate", recipe);
 
     const navigate = useNavigate();
 

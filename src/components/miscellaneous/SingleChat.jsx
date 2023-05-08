@@ -9,7 +9,6 @@ import axios from '../../axios/userAxios';
 import './style.css';
 import ScrollableChat from './ScrollableChat';
 import io from 'socket.io-client';
-// import animationData from '../../animations/typing.json'
 
 const ENDPOINT = "https://shayanara.online/backend";
 //const ENDPOINT = "http://localhost:5000"
@@ -24,15 +23,6 @@ const SingleChat = ({fetchAgain, setFetchAgain}) => {
     const [typing, setTyping] = useState(false);
     const [isTyping, setIsTyping] = useState(false);
 
-    // const defaultOptions = {
-    //     loop: true,
-    //     autoplay: true,
-    //     animationData: animationData,
-    //     rendererSettings: {
-    //         preserverAspectRatio: "xMidYMid slice"
-    //     }
-    // }
-
     const { selectedChat, setSelectedChat, notification, setNotification } = ChatState();
     const { userDetails } = useSelector((state) => state.user);
     const user = userDetails.user;
@@ -44,7 +34,6 @@ const SingleChat = ({fetchAgain, setFetchAgain}) => {
         try {
             setLoading(true);
             const { data } = await axios.get(`/message/${selectedChat._id}`);
-            console.log("Message Kittiyade" ,messages);
             setMessages(data);
             setLoading(false);
             socket.emit('join chat',selectedChat._id);

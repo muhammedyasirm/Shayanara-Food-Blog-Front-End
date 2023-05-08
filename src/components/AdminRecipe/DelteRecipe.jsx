@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import axios from '../../axios/adminAxios';
 import { toast } from 'react-toastify';
 import { AiOutlineClose } from 'react-icons/ai';
+import { useNavigate } from "react-router-dom";
 
 
 const Register_style = {
@@ -26,10 +27,13 @@ const overlay_style = {
 
 const DelteRecipe = ({open, onClose, id}) => {
 
+    const navigate = useNavigate();
+
     const handleDelete = async() => {
         try {
             await axios.delete(`/admin/deleteRecipe/${id}`);
             onClose();
+            navigate("/admin/recipe");
             toast.success("Location Deleted", {
                 position: "top-center",
                 autoClose: 5000,

@@ -17,7 +17,6 @@ const ForgotPassContent = () => {
             setErrMsg("Enter a valid Email id!");
         } else {
             axios.post('/user/forgotPassword', { email }).then((result) => {
-                console.log("Email avde ethi",result);
                 if(result.data.err) {
                     setErrMsg("Something went wrong!");
                 }

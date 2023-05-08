@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { PlusIcon, XIcon, CloudUploadIcon } from "@heroicons/react/solid";
 import axios from '../../axios/adminAxios';
-// import "@tailwindcss/forms";
-// import "./styles.css";
+import { useNavigate } from "react-router-dom";
+
 
 function RecipeForm() {
     const [recipeName, setRecipeName] = useState("");
@@ -12,6 +12,8 @@ function RecipeForm() {
     const [instructions, setInstructions] = useState([""]);
     const [imageFile, setImageFile] = useState(null);
     const [description, setDescription] = useState("")
+
+    const navigate = useNavigate();
 
 
     const handleRecipeNameChange = (event) => {
@@ -84,7 +86,7 @@ function RecipeForm() {
                 "Content-type": "multipart/form-data"
             }
         }).then((result) => {
-            console.log("Recipe add aaki", result);
+            navigate('/admin/recipe')
         })
     };
 

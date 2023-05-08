@@ -59,9 +59,6 @@ const EditPost = ({ open, post, onClose, yourPost }) => {
     const [errMsg, setErrMsg] = useState("");
     const [getLocation, setGetLocation] = useState([]);
 
-    console.log("YOur post", yourPost);
-
-    console.log("Post detailllllll",postt);
 
     useEffect(() => {
         const fetchLocation = async () => {

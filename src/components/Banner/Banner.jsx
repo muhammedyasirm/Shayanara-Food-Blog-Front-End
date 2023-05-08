@@ -3,8 +3,6 @@ import {MdChevronLeft,MdChevronRight,MdOutlineLocalOffer} from 'react-icons/md';
 import {IoFastFoodOutline} from 'react-icons/io5';
 import {IoIosRestaurant} from 'react-icons/io';
 import axios from '../../axios/userAxios';
-// import {GoLocation} from 'react-icons/go';
-// import {BiBarcodeReader} from 'react-icons/bi';
 
 
 function Banner() {

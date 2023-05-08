@@ -10,7 +10,6 @@ const RecipeTable = () => {
 
     const fetchRecipe = useCallback(() => {
         axios.get('/admin/getRecipe').then((res) => {
-            console.log("Recipe kittiyade",res);
             if(res.data.data) {
                 setRecipe(res.data.data);
             }

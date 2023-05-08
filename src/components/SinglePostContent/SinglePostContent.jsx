@@ -6,14 +6,11 @@ import { useParams } from "react-router-dom";
 import Comments from '../Comments/Comments';
 import Follow from '../Follow/Follow';
 import axios from '../../axios/userAxios';
-import { useSelector } from 'react-redux';
 
 const SinglePost = () => {
 
     const params = useParams();
     const [post, setPost] = useState([]);
-
-    const { userDetails } = useSelector((state) => state.user);
 
     // console.log(post[0].userId);
 
@@ -29,7 +26,7 @@ const SinglePost = () => {
                 {post.map((pos, index) => {
                     return (
                         <>
-                            <div className="sm:w-[95%] md:w-[60%]">
+                            <div className="sm:w-[95%] md:w-[60%]" key={index}>
                                 <div className=" flex justify-between">
                                     <div className="p-5 flex ">
                                         <img

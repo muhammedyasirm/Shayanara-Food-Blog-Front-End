@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { AiOutlineClose, AiOutlineMenu, AiFillMessage } from "react-icons/ai";
-import axios from '../../axios/userAxios';
 import { useSelector } from 'react-redux';
 import { URL } from '../../constance/constance';
 

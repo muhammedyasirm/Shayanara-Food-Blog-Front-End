@@ -27,12 +27,9 @@ const MyChats = ({fetchAgain}) => {
         },
     };
 
-    console.log("Logged User ", loggedUser);
-
     const fetchChats = async () => {
         try {
             const { data } = await axios.get("/chat/chat");
-            console.log("Chat kittiyade", data);
             setChats(data);
         } catch (error) {
             toast({
@@ -48,7 +45,6 @@ const MyChats = ({fetchAgain}) => {
 
     useEffect(() => {
         setLoggedUser(userDetails.user);
-        console.log("userDatilssss", userDetails.user);
         fetchChats();
     }, [fetchAgain])
     return (

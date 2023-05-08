@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import { BsFillStarFill } from 'react-icons/bs';
 import { MdDelete } from "react-icons/md";
-import { FaEdit } from "react-icons/fa";
 import { format } from 'timeago.js';
 import { useSelector } from 'react-redux';
-import EditPost from './EditPost';
 import DeletePost from './DeletePost';
 
 const YourPost = ({ yourPosts }) => {

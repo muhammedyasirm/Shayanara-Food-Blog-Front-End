@@ -87,8 +87,6 @@ const RecipeBanner = () => {
         })
     }
 
-    console.log("Edited userdetails:",userDetails);
-
     return (
         <div className='w-full  bg-white flex-col justify-between'>
             <div className='grid md:grid-cols-2 max-w-[1240px] m-auto'>
