@@ -10,7 +10,6 @@ function Home() {
   const [homePost,setHomePost] = useState([]);
   useEffect(() => {
   axios.get('/users/getPosts').then(response => {
-    console.log("Postundade",response.data.postDatas)
        setHomePost(response.data.postDatas)
   }).catch(error => {
       console.log(error)

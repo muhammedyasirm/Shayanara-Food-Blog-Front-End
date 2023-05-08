@@ -31,8 +31,6 @@ function Banner() {
         setSlide(slide === 0 ? length - 1 : slide - 1);
     };
 
-    console.log("Bannerss",banner);
-
     // const autoScroll = true;
     // let slideInterval;
     // let intervalTime = 10000;

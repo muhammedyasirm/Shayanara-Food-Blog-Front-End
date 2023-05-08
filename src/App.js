@@ -24,6 +24,7 @@ import Recipe from './pages/RecipePage/Recipe';
 import RecipeSingle from './pages/RecipePage/RecipeSingle';
 import BannerManage from './pages/AdminBanner/BannerManage';
 import BannerAdd from './pages/AdminBanner/BannerAdd';
+import Error from './components/Error/Error';
 function App() {
   return (
     <ErrorBoundary FallbackComponent={ Fallback } onReset={ () => {}}>
@@ -38,6 +39,7 @@ function App() {
           <Route path='/user/chat' element= {<Chat/>}/>
           <Route path='/user/recipe' element= {<Recipe/>}/>
           <Route path='/user/recipeSingle/:id' element= {<RecipeSingle/>}/>
+          <Route path='*' element= {<Error/>}/>
         </Route>
         
         <Route path='/admin' element={<AdminPrivateRoutes><AdminLogin/></AdminPrivateRoutes>}/>
