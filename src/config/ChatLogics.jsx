@@ -1,7 +1,4 @@
 export const getSender = (loggedUser,users) => {
-    console.log("Chat logic users",users);
-    console.log("Chat logic logged users",loggedUser);
-    // console.log("Chat logic logged id",loggedUser?._id);
 
     return users[0]._id === loggedUser._id ? users[1].fullName : users[0].fullName;
 }
