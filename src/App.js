@@ -25,11 +25,13 @@ import RecipeSingle from './pages/RecipePage/RecipeSingle';
 import BannerManage from './pages/AdminBanner/BannerManage';
 import BannerAdd from './pages/AdminBanner/BannerAdd';
 import Error from './components/Error/Error';
+import PageNotFound from './pages/404/PageNotFound';
 function App() {
   return (
     <ErrorBoundary FallbackComponent={ Fallback } onReset={ () => {}}>
     <Router>
       <Routes>
+        <Route path="/PageNotFound" element={<PageNotFound /> } />
         <Route path='/' element = { <Home/> }/>
         <Route path='/user/post' element = { <Post/> }/>
         <Route path='/user/ForgotPassword' element= {<ForgotPassword/> } />

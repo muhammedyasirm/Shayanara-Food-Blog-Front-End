@@ -5,6 +5,8 @@ import { Tooltip as ReactTooltip } from "react-tooltip";
 import { AiOutlineCloseCircle, AiOutlinePlusCircle } from "react-icons/ai";
 import axios from '../../axios/userAxios';
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import Loader from "../Loader/Loader";
 
 const Register_style = {
     position: "fixed",
@@ -40,6 +42,9 @@ const AddPost = ({ open, id, onClose, changePost }) => {
     const [address, setAddress] = useState("");
     const [errMsg, setErrMsg] = useState("");
     const [getLocation, setGetLocation] = useState([]);
+    const [loader, setLoader] = useState(false);
+
+    const navigate = useNavigate();
 
 
     let url1, url2;
@@ -145,13 +150,16 @@ const AddPost = ({ open, id, onClose, changePost }) => {
             url2
         })
             .then((response) => {
-                console.log("post cheythittund: ", response);
-                if(response.err) {
-                    console.log(response.err)
+                setLoader(true);
+                if(response.err) {  
+                    setLoader(false)                
+                    return navigate('/PageNotFound');
                 }
                 if (response.status === "emptyErr") {
+                    setLoader(false);
                     setErrMsg("Empty values are not allowed");
                 } else {
+                    setLoader(false);
                     onClose();
                     changePost();
                     toast.success("Post added successfully", {
@@ -170,6 +178,7 @@ const AddPost = ({ open, id, onClose, changePost }) => {
             })
 
     }
+    if (loader) return <Loader />;
     if (!open) return null;
     return (
         <>

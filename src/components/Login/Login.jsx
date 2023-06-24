@@ -5,6 +5,7 @@ import axios from '../../axios/userAxios';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setUserDetails } from '../../Redux/Features/userSlice';
+import Loader from '../Loader/Loader';
 
 
 const Register_style = {
@@ -32,6 +33,7 @@ const Login = ({onClose,open}) => {
     const [name, setName] = useState("");
     const [password, setPassword] = useState("");
     const [errMsg, setErrMsg] = useState("");
+    const [loader, setLoader] = useState(false);
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -44,15 +46,18 @@ const Login = ({onClose,open}) => {
     }
 
     const handleLogin = (e) => {
+        setLoader(true);
         e.preventDefault();
         validate();
         if(!errMsg) {
             axios.post('/user/login', {name, password}).then((result) => {
                 if(result?.data?.err) {
+                    setLoader(false);
                     setErrMsg(result.data.err)
                 } else if (result?.data?.logged) {
                     localStorage.setItem("token",result.data.token);
                     dispatch(setUserDetails(result.data))
+                    setLoader(false);
                     onClose();
                     toast.success(
                         'Successfully logged in..',
@@ -72,11 +77,13 @@ const Login = ({onClose,open}) => {
         }
     }
     const forgetPassword = () => {
+        setLoader(true);
         setTimeout(() => {
+            setLoader(false);
           navigate("/user/ForgotPassword");
         }, 1000);
       };
-
+    if (loader) return <Loader />;
     if (!open) return null;
     return (
         <>

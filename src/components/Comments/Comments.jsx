@@ -3,16 +3,29 @@ import { format } from "timeago.js";
 import { BsArrowRightCircleFill } from "react-icons/bs";
 import { useSelector } from 'react-redux';
 import { URL } from '../../constance/constance';
+import { useToast } from '@chakra-ui/react';
 
 const Comments = ({ pos, id }) => {
 
     const [comments, setComments] = useState([]);
     const [comment, setComment] = useState("");
+    const toast = useToast();
 
     const { userDetails } = useSelector((state) => state.user);
     const user = userDetails.user._id;
 
     const postComment = (id) => {
+        if (!comment) {
+            toast({
+                title: "Error Occured",
+                description: "Please Enter a Comment",
+                status: "error",
+                duration: 5000,
+                isClosable: true,
+                position:"bottom-left"
+            });
+            return;
+        }
         fetch(`${URL}/user/commentPost/${id}`, {
             method: "POST",
             headers: {

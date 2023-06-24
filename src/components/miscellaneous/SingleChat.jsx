@@ -10,8 +10,8 @@ import './style.css';
 import ScrollableChat from './ScrollableChat';
 import io from 'socket.io-client';
 
-const ENDPOINT = "https://shayanara.online/backend";
-//const ENDPOINT = "http://localhost:5000"
+// const ENDPOINT = "https://shayanara.online/backend";
+const ENDPOINT = "http://localhost:5000"
 let socket, selectedChatCompare;
 
 const SingleChat = ({fetchAgain, setFetchAgain}) => {

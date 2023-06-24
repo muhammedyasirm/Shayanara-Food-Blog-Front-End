@@ -3,7 +3,9 @@ import { AiOutlineClose } from 'react-icons/ai';
 import { toast } from 'react-toastify';
 import axios from '../../axios/userAxios';
 import Otp from '../Otp/Otp';
+import { useNavigate } from "react-router-dom";
 import { URL } from '../../constance/constance';
+import Loader from '../Loader/Loader';
 
 const RegisterStyle = {
     position: 'fixed',
@@ -36,6 +38,10 @@ const Signup = ({ open, onClose }) => {
     const [password, setPassword] = useState("");
     const [password2, setPassword2] = useState("");
     const [errMsg, setErrMsg] = useState("");
+    const [loader, setLoader] = useState(false);
+
+    const navigate = useNavigate();
+
     const RegisterUser = (e) => {
         e.preventDefault();
         const regx = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -52,17 +58,23 @@ const Signup = ({ open, onClose }) => {
         } else if (password !== password2) {
             setErrMsg("Entered passwords are not matching");
         } else {
+            setLoader(true);
             axios.post('/user/register', { userName, fullName, email, phone, password }).then((response) => {
             if (response.data.err) {
-                console.log("Something wrong")
+                setLoader(false);
+                return navigate('/PageNotFound')
             }
             if (response.data.status === "emailExist") {
+                setLoader(false);
                 setErrMsg("Email already exist !!! Try with another");
             } else if (response.data.status === "userExist") {
+                setLoader(false);
                 setErrMsg("User name already exist !!! Try with another");
             } else if (response.data.status === "err") {
+                setLoader(false);
                 setErrMsg("Something went wrong!!!");
             } else if (response.data.status === "Success") {
+                setLoader(false);
                 setOtp(true);
                 toast.success(
                     'Otp has sended to your email..',
@@ -79,11 +91,12 @@ const Signup = ({ open, onClose }) => {
                 )
             }
         }) .catch((err) => {
-            console.log("Something fishy!!!!",err);
+            navigate('/PageNotFound');
         })
         }
     }
     if (!open) return null;
+    if (loader) return <Loader />;
     return (
         <>
             <div style={overlay_style}>
